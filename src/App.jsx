@@ -1,15 +1,20 @@
 import { useState } from 'react';
-import NavMenu from './components/NavMenu.jsx';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import NavMenu from './components/NavMenu';
 
 function App() {
   return (
-    <div className="App">
+    <BrowserRouter>
       <NavMenu />
       <div style={{ padding: '1em' }}>
-        <h1>Book Search App</h1>
-        <p>Content will go here</p>
+        <Routes>
+          <Route path="/" element={<h2>Home Page / Book List will go here</h2>} />
+          <Route path="/books/:id" element={<h2>Book Detail will go here</h2>} />
+          <Route path="/add" element={<h2>Add Book Form will go here</h2>} />
+          <Route path="*" element={<h2>Page not found</h2>} />
+        </Routes>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 
