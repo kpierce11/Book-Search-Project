@@ -1,8 +1,9 @@
 import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 
 function SearchBar({ query, onQueryChange }) {
   return (
-    <div style={{ margin: '1em 0' }}>
+    <Box sx={{ margin: '1em 0', maxWidth: '100%' }}>
       <TextField 
         variant="outlined" 
         label="Search books" 
@@ -11,7 +12,7 @@ function SearchBar({ query, onQueryChange }) {
         onChange={(e) => onQueryChange(e.target.value)}
         fullWidth 
       />
-    </div>
+    </Box>
   );
 }
 

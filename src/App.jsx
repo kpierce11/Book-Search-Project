@@ -7,6 +7,7 @@ import BookDetail from './components/BookDetail';
 import { Box, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import AddBookForm from './components/AddBookForm';
+import { Container } from '@mui/material';
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -57,7 +58,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavMenu />
-      <div style={{ padding: '1em' }}>
+      <Container maxWidth="lg" sx={{ py: 2 }}>
         <Routes>
           <Route path="/" element={
             <>
@@ -88,7 +89,7 @@ function App() {
             </Box>
           } />
         </Routes>
-      </div>
+      </Container>
     </BrowserRouter>
   );
 }
