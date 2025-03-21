@@ -4,8 +4,7 @@ import { Button, Typography, Box, Paper, CircularProgress } from '@mui/material'
 function BookDetail({ books }) {
   const { id } = useParams();
   const navigate = useNavigate();
-  const bookId = parseInt(id, 10);
-  const book = books.find(b => b.id === bookId);
+  const book = books.find(b => b.id === id);
 
   // Handle loading state
   if (books.length === 0) {
@@ -16,7 +15,7 @@ function BookDetail({ books }) {
       </Box>
     );
   }
-  
+
   if (!book) {
     return (
       <Box sx={{ padding: '1em' }}>
