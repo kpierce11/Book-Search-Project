@@ -4,6 +4,9 @@ import NavMenu from './components/NavMenu';
 import SearchBar from './components/SearchBar';
 import BookList from './components/BookList';
 import BookDetail from './components/BookDetail';
+import { Box, Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
+
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -43,7 +46,23 @@ function App() {
           } />
           <Route path="/books/:id" element={<BookDetail books={sampleBooks} />} />
           <Route path="/add" element={<h2>Add Book Form will go here</h2>} />
-          <Route path="*" element={<h2>Page not found</h2>} />
+
+          <Route path="*" element={
+            <Box sx={{ padding: '2em', textAlign: 'center' }}>
+             <Typography variant="h4" gutterBottom>Page Not Found</Typography>
+             <Typography variant="body1" paragraph>
+                Sorry, the page you're looking for doesn't exist.
+              </Typography>
+              <Button 
+               variant="contained" 
+                color="primary" 
+                component={Link} 
+                to="/"
+             >
+               Return to Home
+              </Button>
+           </Box>
+          } />
         </Routes>
       </div>
     </BrowserRouter>
