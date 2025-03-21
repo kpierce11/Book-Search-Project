@@ -27,9 +27,8 @@ function BookDetail({ books }) {
     <Paper sx={{ padding: '2em', maxWidth: '800px', margin: '0 auto' }}>
       <Typography variant="h4" gutterBottom>{book.title}</Typography>
       <Typography variant="subtitle1" gutterBottom>by {book.author}</Typography>
-      <Typography variant="body1" paragraph><b>Genre:</b> {book.genre}</Typography>
-      <Typography variant="body2" paragraph>
-        {book.description || "No description available for this book."}
+      <Typography variant="body1" sx={{ marginBottom: '1em' }}><b>Genre:</b> {book.genre}</Typography>
+      <Typography variant="body2" sx={{ marginBottom: '1em' }}> {book.description || "No description available for this book."}
       </Typography>
       <Button 
         variant="contained" 
