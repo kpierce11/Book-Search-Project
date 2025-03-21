@@ -12,6 +12,9 @@ function App() {
   const [books, setBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [error, setError] = useState(null);
+  const handleAddBook = (newBook) => {
+    setBooks((prevBooks) => [...prevBooks, newBook]); 
+  };
   
   // Fetch books data on initial load
   useEffect(() => {
@@ -67,7 +70,7 @@ function App() {
             </>
           } />
           <Route path="/books/:id" element={<BookDetail books={books} />} />
-          <Route path="/add" element={<AddBookForm />} />
+          <Route path="/add" element={<AddBookForm onAddBook={handleAddBook} />} />
           <Route path="*" element={
             <Box sx={{ padding: '2em', textAlign: 'center' }}>
               <Typography variant="h4" gutterBottom>Page Not Found</Typography>
