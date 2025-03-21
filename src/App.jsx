@@ -28,17 +28,25 @@ function App() {
         console.error("Failed to fetch books:", err);
         setError("Unable to load book data. Please try again later.");
       });
-  }, []);  // run once on mount
+  }, []);  
   
   // Filter books based on search query
   const filteredBooks = books.filter(book => {
     const query = searchQuery.toLowerCase();
+    const regex = new RegExp(`\\b${query}`, "i"); 
+  
+
+    const genreMatches = book.genre.some(genre =>
+      genre.toLowerCase().startsWith(query)
+    );
+  
     return (
-      book.title.toLowerCase().includes(query) ||
-      book.author.toLowerCase().includes(query) ||
-      book.genre.toLowerCase().includes(query)
+      regex.test(book.title) ||  
+      regex.test(book.author) || 
+      genreMatches               
     );
   });
+  
   
   // Sort filtered books alphabetically by title
   filteredBooks.sort((a, b) => a.title.localeCompare(b.title));
