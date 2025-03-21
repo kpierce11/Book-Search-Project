@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavMenu from './components/NavMenu';
 import SearchBar from './components/SearchBar';
@@ -9,19 +9,29 @@ import { Link } from 'react-router-dom';
 
 
 function App() {
+  const [books, setBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [error, setError] = useState(null);
   
-  // Sample data for testing
-  const sampleBooks = [
-    { id: 1, title: "The Great Gatsby", author: "F. Scott Fitzgerald", genre: "Fiction" },
-    { id: 2, title: "Learning JavaScript", author: "John Doe", genre: "Nonfiction" },
-    { id: 3, title: "Pride and Prejudice", author: "Jane Austen", genre: "Fiction" },
-    { id: 4, title: "To Kill a Mockingbird", author: "Harper Lee", genre: "Fiction" },
-    { id: 5, title: "JavaScript: The Good Parts", author: "Douglas Crockford", genre: "Nonfiction" }
-  ];
+  // Fetch books data on initial load
+  useEffect(() => {
+    fetch('http://localhost:3001/books')
+      .then(res => {
+        if (!res.ok) throw new Error(`Server error: ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        setBooks(data);
+        setError(null);
+      })
+      .catch(err => {
+        console.error("Failed to fetch books:", err);
+        setError("Unable to load book data. Please try again later.");
+      });
+  }, []);  // run once on mount
   
   // Filter books based on search query
-  const filteredBooks = sampleBooks.filter(book => {
+  const filteredBooks = books.filter(book => {
     const query = searchQuery.toLowerCase();
     return (
       book.title.toLowerCase().includes(query) ||
@@ -32,7 +42,7 @@ function App() {
   
   // Sort filtered books alphabetically by title
   filteredBooks.sort((a, b) => a.title.localeCompare(b.title));
-
+  
   return (
     <BrowserRouter>
       <NavMenu />
@@ -41,27 +51,30 @@ function App() {
           <Route path="/" element={
             <>
               <SearchBar query={searchQuery} onQueryChange={setSearchQuery} />
-              <BookList books={filteredBooks} />
+              {error ? (
+                <p style={{ color: 'red' }}>{error}</p>
+              ) : (
+                <BookList books={filteredBooks} />
+              )}
             </>
           } />
-          <Route path="/books/:id" element={<BookDetail books={sampleBooks} />} />
+          <Route path="/books/:id" element={<BookDetail books={books} />} />
           <Route path="/add" element={<h2>Add Book Form will go here</h2>} />
-
           <Route path="*" element={
             <Box sx={{ padding: '2em', textAlign: 'center' }}>
-             <Typography variant="h4" gutterBottom>Page Not Found</Typography>
-             <Typography variant="body1" paragraph>
+              <Typography variant="h4" gutterBottom>Page Not Found</Typography>
+              <Typography variant="body1" paragraph>
                 Sorry, the page you're looking for doesn't exist.
               </Typography>
               <Button 
-               variant="contained" 
+                variant="contained" 
                 color="primary" 
                 component={Link} 
                 to="/"
-             >
-               Return to Home
+              >
+                Return to Home
               </Button>
-           </Box>
+            </Box>
           } />
         </Routes>
       </div>
