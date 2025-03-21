@@ -25,7 +25,8 @@ Follow these steps to set up the project locally:
    ```sh
    npm run dev
    ```
-   5. **View the app at http://localhost:5173**
+   
+5. **View the app at http://localhost:5173**
 
 ## Usage
 
