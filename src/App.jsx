@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavMenu from './components/NavMenu';
 import SearchBar from './components/SearchBar';
 import BookList from './components/BookList';
+import BookDetail from './components/BookDetail';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -28,7 +29,7 @@ function App() {
   
   // Sort filtered books alphabetically by title
   filteredBooks.sort((a, b) => a.title.localeCompare(b.title));
-  
+
   return (
     <BrowserRouter>
       <NavMenu />
@@ -40,7 +41,7 @@ function App() {
               <BookList books={filteredBooks} />
             </>
           } />
-          <Route path="/books/:id" element={<h2>Book Detail will go here</h2>} />
+          <Route path="/books/:id" element={<BookDetail books={sampleBooks} />} />
           <Route path="/add" element={<h2>Add Book Form will go here</h2>} />
           <Route path="*" element={<h2>Page not found</h2>} />
         </Routes>
