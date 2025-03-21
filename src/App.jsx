@@ -2,9 +2,17 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavMenu from './components/NavMenu';
 import SearchBar from './components/SearchBar';
+import BookList from './components/BookList';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
+  
+  // Sample data for testing
+  const sampleBooks = [
+    { id: 1, title: "The Great Gatsby", author: "F. Scott Fitzgerald", genre: "Fiction" },
+    { id: 2, title: "Learning JavaScript", author: "John Doe", genre: "Nonfiction" },
+    { id: 3, title: "Pride and Prejudice", author: "Jane Austen", genre: "Fiction" }
+  ];
   
   return (
     <BrowserRouter>
@@ -14,8 +22,7 @@ function App() {
           <Route path="/" element={
             <>
               <SearchBar query={searchQuery} onQueryChange={setSearchQuery} />
-              <p>Search query: {searchQuery}</p>
-              <h2>Book List will go here</h2>
+              <BookList books={sampleBooks} />
             </>
           } />
           <Route path="/books/:id" element={<h2>Book Detail will go here</h2>} />
