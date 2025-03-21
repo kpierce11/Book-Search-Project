@@ -26,6 +26,9 @@ function App() {
     );
   });
   
+  // Sort filtered books alphabetically by title
+  filteredBooks.sort((a, b) => a.title.localeCompare(b.title));
+  
   return (
     <BrowserRouter>
       <NavMenu />
