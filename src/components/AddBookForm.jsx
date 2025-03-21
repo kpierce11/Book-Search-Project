@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { TextField, Button, Box, Typography, Paper } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function AddBookForm({ onAddBook }) {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [genre, setGenre] = useState('');
   const [description, setDescription] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault(); // prevent page refresh
@@ -35,6 +37,15 @@ function AddBookForm({ onAddBook }) {
       .then(data => {
         console.log('Book added successfully:', data);
         if (onAddBook) onAddBook(data);
+
+        // Clear form fields
+        setTitle('');
+        setAuthor('');
+        setGenre('');
+        setDescription('');
+        
+        // Redirect back to home page
+        navigate(`/books/${data.id}`);
       })
       .catch(err => {
         console.error("Failed to add book:", err);
