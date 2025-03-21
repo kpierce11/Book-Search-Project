@@ -6,7 +6,7 @@ import BookList from './components/BookList';
 import BookDetail from './components/BookDetail';
 import { Box, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-
+import AddBookForm from './components/AddBookForm';
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -67,7 +67,7 @@ function App() {
             </>
           } />
           <Route path="/books/:id" element={<BookDetail books={books} />} />
-          <Route path="/add" element={<h2>Add Book Form will go here</h2>} />
+          <Route path="/add" element={<AddBookForm />} />
           <Route path="*" element={
             <Box sx={{ padding: '2em', textAlign: 'center' }}>
               <Typography variant="h4" gutterBottom>Page Not Found</Typography>
