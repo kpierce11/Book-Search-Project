@@ -16,10 +16,30 @@ function AddBookForm({ onAddBook }) {
       return;
     }
     
-    // Create new book object to be sent
-    const newBook = { title, author, genre, description };
-    console.log("Form submitted", newBook);
-    // POST logic will be added in a future commit
+    // Ensure genre is stored as an array (split by commas if multiple genres)
+    const formattedGenre = genre.split(",").map(g => g.trim());
+  
+    // Create new book object
+    const newBook = { title, author, genre: formattedGenre, description };
+    
+    // POST to server
+    fetch('http://localhost:3001/books', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newBook)
+    })
+      .then(res => {
+        if (!res.ok) throw new Error(`Server error: ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        console.log('Book added successfully:', data);
+        if (onAddBook) onAddBook(data);
+      })
+      .catch(err => {
+        console.error("Failed to add book:", err);
+        alert("Error: Could not add book. Please try again.");
+      });
   };
 
   return (

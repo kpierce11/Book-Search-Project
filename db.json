@@ -1,5 +1,5 @@
 {
-    "books": [
+  "books": [
     {
       "id": 1,
       "title": "To Kill a Mockingbird",
@@ -599,6 +599,15 @@
       ],
       "description": "A collection of mythopoeic stories about the history of Middle-earth.",
       "cover_image": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+      "id": "fb67",
+      "title": "Test Title",
+      "author": "Test Author",
+      "genre": [
+        "Test Genre"
+      ],
+      "description": "Test Description"
     }
   ]
 }
