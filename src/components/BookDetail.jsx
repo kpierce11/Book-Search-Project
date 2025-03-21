@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { Button, Typography, Box, Paper } from '@mui/material';
+import { Button, Typography, Box, Paper, CircularProgress } from '@mui/material';
 
 function BookDetail({ books }) {
   const { id } = useParams();
@@ -7,6 +7,16 @@ function BookDetail({ books }) {
   const bookId = parseInt(id, 10);
   const book = books.find(b => b.id === bookId);
 
+  // Handle loading state
+  if (books.length === 0) {
+    return (
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4 }}>
+        <CircularProgress />
+        <Typography variant="body1" sx={{ mt: 2 }}>Loading book details...</Typography>
+      </Box>
+    );
+  }
+  
   if (!book) {
     return (
       <Box sx={{ padding: '1em' }}>

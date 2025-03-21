@@ -599,42 +599,6 @@
       ],
       "description": "A collection of mythopoeic stories about the history of Middle-earth.",
       "cover_image": "https://fakeimg.pl/667x1000/cc6600"
-    },
-    {
-      "id": "4337",
-      "title": "Test Title",
-      "author": "Test Author",
-      "genre": [
-        "Test Genre"
-      ],
-      "description": "Test Description"
-    },
-    {
-      "id": "b968",
-      "title": "Test Title",
-      "author": "Test Author",
-      "genre": [
-        "Test Genre"
-      ],
-      "description": "Test Description"
-    },
-    {
-      "id": "90f6",
-      "title": "asdf",
-      "author": "asdf",
-      "genre": [
-        "asdf"
-      ],
-      "description": "asdf"
-    },
-    {
-      "id": "4355",
-      "title": "fdsa",
-      "author": "fda",
-      "genre": [
-        "fdsa"
-      ],
-      "description": "fdsa"
     }
   ]
 }
