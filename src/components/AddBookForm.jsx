@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { TextField, Button, Box, Typography, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 function AddBookForm({ onAddBook }) {
   const [title, setTitle] = useState('');
@@ -22,7 +23,7 @@ function AddBookForm({ onAddBook }) {
     const formattedGenre = genre.split(",").map(g => g.trim());
   
     // Create new book object
-    const newBook = { title, author, genre: formattedGenre, description };
+    const newBook = { id: uuidv4(), title, author, genre: formattedGenre, description };
     
     // POST to server
     fetch('http://localhost:3001/books', {
@@ -36,7 +37,7 @@ function AddBookForm({ onAddBook }) {
       })
       .then(data => {
         console.log('Book added successfully:', data);
-        if (onAddBook) onAddBook(data);
+        onAddBook(data);
 
         // Clear form fields
         setTitle('');
@@ -44,7 +45,7 @@ function AddBookForm({ onAddBook }) {
         setGenre('');
         setDescription('');
         
-        // Redirect back to home page
+        // Redirect to book detail page
         navigate(`/books/${data.id}`);
       })
       .catch(err => {
