@@ -24,7 +24,7 @@ function BookList({ books }) {
           >
             <ListItemText 
               primary={book.title} 
-              secondary={`${book.author} — ${book.genre}`}
+              secondary={`${book.author} — ${book.genre.join(', ')}`}
             />
           </ListItem>
         ))
